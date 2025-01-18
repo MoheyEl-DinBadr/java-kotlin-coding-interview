@@ -2,10 +2,20 @@ package com.mohey.app
 
 import com.mohey.enums.Move
 import com.mohey.enums.MoveResult
+import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
+import jakarta.enterprise.event.Observes
+import org.slf4j.LoggerFactory
 
 @ApplicationScoped
 class PlayGround {
+    companion object {
+        val logger = LoggerFactory.getLogger(PlayGround::class.java)!!
+    }
+
+    fun onStart(@Observes ev: StartupEvent) {
+        play(100)
+    }
 
     fun play(moves: Int): Map<MoveResult, Int> {
 
@@ -21,12 +31,14 @@ class PlayGround {
         }
 
         val resultCountPerValue = playerAResults.groupingBy { it }.eachCount()
-
-        println("""
+        logger.info(
+            """
+            
             "Player A wins ${resultCountPerValue[MoveResult.WIN]} of $moves games"
             "Player B wins ${resultCountPerValue[MoveResult.LOSE]} of $moves games"
             "Draws: ${resultCountPerValue[MoveResult.DRAW]} of $moves games"
-        """.trimIndent())
+        """.trimIndent()
+        )
 
         return resultCountPerValue
     }

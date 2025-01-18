@@ -14,6 +14,7 @@ import java.util.stream.Stream
 @QuarkusTest
 class PlayGroundTest {
     val playGround: PlayGround = PlayGround()
+
     companion object {
         @JvmStatic
         fun provideParameters(): Stream<Arguments> {
@@ -30,7 +31,7 @@ class PlayGroundTest {
                 Arguments.of(Move.SCISSOR, Move.PAPER, MoveResult.WIN),
                 Arguments.of(Move.SCISSOR, Move.SCISSOR, MoveResult.DRAW)
 
-                )
+            )
         }
     }
 
