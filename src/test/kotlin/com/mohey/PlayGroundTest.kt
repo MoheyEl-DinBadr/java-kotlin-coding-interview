@@ -5,6 +5,7 @@ import com.mohey.enums.Move
 import com.mohey.enums.MoveResult
 import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -36,9 +37,18 @@ class PlayGroundTest {
 
     @ParameterizedTest
     @MethodSource("provideParameters")
-    fun testMoves(playerAMove: Move, playerBMove: Move, expectedResult: MoveResult) {
+    fun testMovesResults(playerAMove: Move, playerBMove: Move, expectedResult: MoveResult) {
         val result = playGround.playerOneResult(playerAMove, playerBMove)
         assertEquals(expectedResult, result)
+    }
+
+
+    @Test
+    fun testPlayMethodResultsCount() {
+        val moves = 10
+        val resultMap = playGround.play(10)
+        val resultSum = resultMap.map { it.value }.sum()
+        assertEquals(moves, resultSum)
     }
 
 
