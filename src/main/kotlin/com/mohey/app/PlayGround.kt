@@ -7,7 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class PlayGround {
 
-    fun play(moves: Int) {
+    fun play(moves: Int): Map<MoveResult, Int> {
 
         var playerAResults = ArrayList<MoveResult>();
 
@@ -27,6 +27,8 @@ class PlayGround {
             "Player B wins ${resultCountPerValue[MoveResult.LOSE]} of $moves games"
             "Draws: ${resultCountPerValue[MoveResult.DRAW]} of $moves games"
         """.trimIndent())
+
+        return resultCountPerValue
     }
 
 
