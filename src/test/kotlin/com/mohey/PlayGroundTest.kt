@@ -36,8 +36,8 @@ class PlayGroundTest {
 
     @ParameterizedTest
     @MethodSource("provideParameters")
-    fun testMoves(playerOneMove: Move, playerTwoMove: Move, expectedResult: MoveResult) {
-        val result = playGround.playerOneResult(playerOneMove, playerTwoMove)
+    fun testMoves(playerAMove: Move, playerBMove: Move, expectedResult: MoveResult) {
+        val result = playGround.playerOneResult(playerAMove, playerBMove)
         assertEquals(expectedResult, result)
     }
 
