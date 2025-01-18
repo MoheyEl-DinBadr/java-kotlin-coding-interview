@@ -13,7 +13,7 @@ class PlayGround {
             playerTwoMove -> MoveResult.DRAW
             Move.ROCK -> if (playerTwoMove == Move.PAPER) MoveResult.LOSE else MoveResult.WIN
             Move.PAPER -> if (playerTwoMove == Move.ROCK) MoveResult.WIN else MoveResult.LOSE
-            Move.SCISSOR -> if (playerTwoMove == Move.PAPER) MoveResult.LOSE else MoveResult.WIN
+            Move.SCISSOR -> if (playerTwoMove == Move.PAPER) MoveResult.WIN else MoveResult.LOSE
         }
     }
 }
