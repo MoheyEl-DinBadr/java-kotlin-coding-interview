@@ -14,7 +14,7 @@ class PlayGround {
     }
 
     fun onStart(@Observes ev: StartupEvent) {
-        play(100)
+        play(1)
     }
 
     fun play(moves: Int): Map<MoveResult, Int> {
@@ -24,7 +24,7 @@ class PlayGround {
 
         repeat(moves) {
             val playerAMove = Move.random()
-            val playerBMove = Move.ROCK
+            val playerBMove = Move.random()
 
             val result = playerOneResult(playerAMove, playerBMove)
             playerAResults.add(result)
@@ -45,11 +45,16 @@ class PlayGround {
 
 
     fun playerOneResult(playerAMove: Move, playerBMove: Move): MoveResult {
-        return when (playerAMove) {
-            playerBMove -> MoveResult.DRAW
-            Move.ROCK -> if (playerBMove == Move.PAPER) MoveResult.LOSE else MoveResult.WIN
-            Move.PAPER -> if (playerBMove == Move.ROCK) MoveResult.WIN else MoveResult.LOSE
-            Move.SCISSOR -> if (playerBMove == Move.PAPER) MoveResult.WIN else MoveResult.LOSE
-        }
+        logger.info("Player A Move: $playerAMove, player B Move: $playerBMove")
+        val orderDiff = playerAMove.order - playerBMove.order
+        if (orderDiff == 0) return MoveResult.DRAW
+        val isEven: Boolean  = orderDiff%2 == 0
+        var result = if (isEven) MoveResult.WIN else MoveResult.LOSE
+        val isPositive: Boolean = orderDiff > 0
+        if (isPositive) result = MoveResult.revert(result)
+
+
+        return result
+
     }
 }

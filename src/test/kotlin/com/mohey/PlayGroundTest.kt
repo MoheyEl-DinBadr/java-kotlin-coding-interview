@@ -14,6 +14,15 @@ import java.util.stream.Stream
 @QuarkusTest
 class PlayGroundTest {
     val playGround: PlayGround = PlayGround()
+    /*
+    * SCISSORS -> 0
+    * PAPER -> 1
+    * ROCK -> 2
+    * LIZARD -> 3
+    * SPOCK -> 4
+    *
+    *
+    * */
 
     companion object {
         @JvmStatic
@@ -23,13 +32,14 @@ class PlayGroundTest {
                 Arguments.of(Move.ROCK, Move.PAPER, MoveResult.LOSE),
                 Arguments.of(Move.ROCK, Move.SCISSOR, MoveResult.WIN),
 
+
                 Arguments.of(Move.PAPER, Move.ROCK, MoveResult.WIN),
                 Arguments.of(Move.PAPER, Move.PAPER, MoveResult.DRAW),
                 Arguments.of(Move.PAPER, Move.SCISSOR, MoveResult.LOSE),
 
                 Arguments.of(Move.SCISSOR, Move.ROCK, MoveResult.LOSE),
                 Arguments.of(Move.SCISSOR, Move.PAPER, MoveResult.WIN),
-                Arguments.of(Move.SCISSOR, Move.SCISSOR, MoveResult.DRAW)
+                Arguments.of(Move.SCISSOR, Move.SCISSOR, MoveResult.DRAW),
 
             )
         }
